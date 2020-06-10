@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCustomerActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ic_back" />
+
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_add_customer"
+            style="@style/textview14white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Upload meter data"
+            android:textStyle="normal">
+        </TextView>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                style="@style/text_16_primary"
+                android:textAlignment="textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer name- Raghav"
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="false"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter amount" />
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:inputType="number"
+                    android:hint="Enter amount"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter description" />
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:inputType="text"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:hint="Enter description(Optional)"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Capture meter picture" />
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/iv_scan"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:scaleType="fitXY"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_scan" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:text="Submit"
+                android:textAllCaps="true"
+                style="@style/textview14white"
+                android:textStyle="bold"
+                android:background="@drawable/rectangle_bg_solid"
+                android:textAlignment="center"
+                >
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
