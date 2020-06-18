@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:allowBackup="false"
         android:hardwareAccelerated="true"
@@ -24,7 +27,8 @@
         android:theme="@style/Theme.PetrolPumpScanner"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="q">
-        <activity android:name=".UploadMeterActivity"></activity>
+        <activity android:name=".AddcustomerQrScan" />
+        <activity android:name=".UploadMeterActivity" />
         <activity android:name=".ThanksActivity" />
         <activity android:name=".AddCustomerActivity" />
         <activity android:name=".MainActivity" />
@@ -35,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

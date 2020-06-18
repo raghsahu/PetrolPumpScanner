@@ -39,38 +39,26 @@
 
               </RelativeLayout>
 
-    <LinearLayout
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical"
+    <FrameLayout
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:keepScreenOn="true">
 
+        <com.journeyapps.barcodescanner.DecoratedBarcodeView
+            android:id="@+id/barcode_scanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
 
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/iv_scan"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_200sdp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:srcCompat="@drawable/ic_scan" />
-
-
-        <TextView
-            android:layout_marginTop="@dimen/_20sdp"
-            android:id="@+id/tv_scan"
-            style="@style/textview14white"
-            android:layout_width="@dimen/_150sdp"
+        <Button
+            android:layout_marginBottom="@dimen/_35sdp"
+            android:id="@+id/btn_flash"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan QR"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/rectangle_bg_solid"
-            android:textStyle="normal">
-        </TextView>
+            android:layout_gravity="bottom|center"
+            android:text="Flash"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

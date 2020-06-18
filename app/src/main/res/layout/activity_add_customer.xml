@@ -28,7 +28,6 @@
            android:layout_centerInParent="true"
             android:gravity="center_vertical"
             android:layout_centerHorizontal="true"
-            android:id="@+id/tv_add_customer"
             style="@style/textview14white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +73,7 @@
 
 
                 <EditText
-                    android:id="@+id/et_email"
+                    android:id="@+id/et_customer_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -102,10 +101,12 @@
 
 
                 <EditText
+                    android:id="@+id/et_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:inputType="text"
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:hint="Enter customer mobile"
                     android:background="@drawable/edit_text_bg"
                     android:padding="@dimen/_10sdp"
@@ -129,6 +130,7 @@
 
 
                 <EditText
+                    android:id="@+id/et_vehical_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -140,29 +142,34 @@
 
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <TextView
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/_14sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scan QR" />
+                <TextView
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IndianOil XTRAREWARDS Card No." />
 
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/iv_scan"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:scaleType="fitXY"
-                android:visibility="visible"
-                app:srcCompat="@drawable/ic_scan" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/et_reward_card_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:inputType="text"
+                    android:hint="Enter extra reward card no"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -191,7 +198,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_add"
+                android:id="@+id/tv_add_customer"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_30sdp"

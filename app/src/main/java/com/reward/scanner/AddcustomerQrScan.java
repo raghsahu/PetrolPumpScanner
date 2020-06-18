@@ -4,43 +4,48 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ResultPoint;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.reward.scanner.api_client.Api_Call;
+import com.reward.scanner.api_client.Base_Url;
+import com.reward.scanner.api_client.RxApiClient;
+import com.reward.scanner.model.SuccessModel;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.HttpException;
+
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class MainActivity extends AppCompatActivity {
+public class AddcustomerQrScan extends AppCompatActivity {
 
-    TextView tv_add_customer;
+    ImageView iv_back;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private DecoratedBarcodeView barcodeView;
 
@@ -49,21 +54,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_addcustomer_qr_scan);
 
         isFlashOn = false;
-
-        tv_add_customer = findViewById(R.id.tv_add_customer);
+        iv_back=findViewById(R.id.iv_back);
         barcodeView = findViewById(R.id.barcode_scanner);
         Button btnFlash = findViewById(R.id.btn_flash);
-
-        //******scan QR**
-        if (!checkPermission()) {
-            requestPermission();
-
-        } else {
-            scanQR();
-        }
 
         if (!hasFlash()) {
             btnFlash.setVisibility(View.GONE);
@@ -74,12 +70,18 @@ public class MainActivity extends AppCompatActivity {
                 switchFlashlight();
             }
         });
+        //******scan QR**
+        if (!checkPermission()) {
+            requestPermission();
 
-        tv_add_customer.setOnClickListener(new View.OnClickListener() {
+        } else {
+            scanQR();
+        }
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddcustomerQrScan.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 
@@ -100,18 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void scanQR() {
-//        //initiating the qr code scan
-//       // qrScan.initiateScan();
-        //**********************************************************
-//        IntentIntegrator integrator = new IntentIntegrator(this);
-//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-//        integrator.setPrompt("Scan a QR Code");
-//        integrator.setCameraId(0);
-//        integrator.setBeepEnabled(true);
-//        integrator.setBarcodeImageEnabled(false);
-//        integrator.initiateScan();
 
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.CODE_39); // Set barcode type
         barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory());
@@ -123,10 +114,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void barcodeResult(BarcodeResult result) {
             Log.e("scan_result", result.getText()); // QR/Barcode result
-            Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(MainActivity.this, UploadMeterActivity.class);
-             intent.putExtra("Qr_data",result.getText());
+            Toast.makeText(AddcustomerQrScan.this, result.getText(), Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(AddcustomerQrScan.this, AddCustomerActivity.class);
+            intent.putExtra("Qr_data",result.getText());
             startActivity(intent);
+            finish();
         }
 
         @Override
@@ -134,10 +127,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(MainActivity.this, READ_EXTERNAL_STORAGE);
-        int result1 = ContextCompat.checkSelfPermission(MainActivity.this, CAMERA);
-        int result2 = ContextCompat.checkSelfPermission(MainActivity.this, WRITE_EXTERNAL_STORAGE);
+        int result = ContextCompat.checkSelfPermission(AddcustomerQrScan.this, READ_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(AddcustomerQrScan.this, CAMERA);
+        int result2 = ContextCompat.checkSelfPermission(AddcustomerQrScan.this, WRITE_EXTERNAL_STORAGE);
 
         return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED
                 && result2 == PackageManager.PERMISSION_GRANTED;
@@ -145,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestPermission() {
 
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{READ_EXTERNAL_STORAGE, CAMERA,}, PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(AddcustomerQrScan.this, new String[]{READ_EXTERNAL_STORAGE, CAMERA,}, PERMISSION_REQUEST_CODE);
 
     }
 
@@ -191,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(MainActivity.this)
+        new AlertDialog.Builder(AddcustomerQrScan.this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", null)
@@ -199,45 +193,6 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            //*************QR scan result************
-            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-            if (result != null) {
-                //if qrcode has nothing in it
-                if (result.getContents() == null) {
-                    Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
-                } else {
-                    //if qr contains data
-                   // try {
-                        Log.e("scan_data", "" + result.getContents());
-                        //converting the data to json
-                        //JSONObject obj = new JSONObject(result.getContents());
-                       // Log.e("scan_data", "" + obj);
-
-                        //setting values to textviews
-                        //textViewName.setText(obj.getString("name"));
-                        // textViewAddress.setText(obj.getString("address"));
-                  //  } catch (JSONException e) {
-                   //     e.printStackTrace();
-                        //if control comes here
-                        //that means the encoded format not matches
-                        //in this case you can display whatever data is available on the qrcode
-                        //to a toast
-                        Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-                   // }
-                    Intent intent = new Intent(MainActivity.this, UploadMeterActivity.class);
-                   // intent.putExtra("Qr_data",result.getContents());
-                    startActivity(intent);
-
-                }
-            } else {
-                super.onActivityResult(requestCode, resultCode, data);
-            }
-
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -249,5 +204,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         barcodeView.pause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
