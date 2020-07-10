@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddcustomerQrScan.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -123,10 +125,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void barcodeResult(BarcodeResult result) {
             Log.e("scan_result", result.getText()); // QR/Barcode result
-            Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, UploadMeterActivity.class);
-             intent.putExtra("Qr_data",result.getText());
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("Qr_data",result.getText());
             startActivity(intent);
+            finish();
         }
 
         @Override
@@ -229,7 +233,9 @@ public class MainActivity extends AppCompatActivity {
                    // }
                     Intent intent = new Intent(MainActivity.this, UploadMeterActivity.class);
                    // intent.putExtra("Qr_data",result.getContents());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
 
                 }
             } else {
@@ -249,5 +255,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         barcodeView.pause();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+       finish();
     }
 }

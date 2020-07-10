@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class SuccessModel {
     @SerializedName("success")
     @Expose
-    private Integer success;
+    private Integer success=0;
     @SerializedName("message")
     @Expose
     private String message;

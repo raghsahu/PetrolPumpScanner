@@ -114,7 +114,7 @@ public class AddcustomerQrScan extends AppCompatActivity {
         @Override
         public void barcodeResult(BarcodeResult result) {
             Log.e("scan_result", result.getText()); // QR/Barcode result
-            Toast.makeText(AddcustomerQrScan.this, result.getText(), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(AddcustomerQrScan.this, result.getText(), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(AddcustomerQrScan.this, AddCustomerActivity.class);
             intent.putExtra("Qr_data",result.getText());
@@ -208,6 +208,11 @@ public class AddcustomerQrScan extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
+      // finish();
+        Intent intent = new Intent(AddcustomerQrScan.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

@@ -29,24 +29,24 @@ public interface Api_Call {
     @FormUrlEncoded
     @POST(add_customer)
     Observable<SuccessModel> AddNewCustomer(
-            @Field("customer_name")  String customer_name,
-            @Field("mobile_no")   String customer_mobile,
-            @Field("vehicle_no")   String customer_vehical,
-            @Field("io_xtrarewards_card_no")   String customer_reward_card,
-            @Field("qrcode_id")  String qrData);
+            @Field("customer_name") String customer_name,
+            @Field("mobile_no") String customer_mobile,
+            @Field("vehicle_no") String customer_vehical,
+            @Field("io_xtrarewards_card_no") String customer_reward_card,
+            @Field("qrcode") String qrData,
+            @Field("dob") String customer_dob);
 
     @Headers("API-KEY: 123456")
     @FormUrlEncoded
     @POST(save_qrcode_for_customer)
     Observable<SuccessModel>  SaveQrCode(
-            @Field("qrtext")  String qr_text,
-            @Field("qrcode")  String s);
+            @Field("qrcode")  String qrcode);
 
     @Headers("API-KEY: 123456")
     @FormUrlEncoded
     @POST(scan_qr_code_for_customer_info)
     Observable<FindCustomerModel>FindCustomer(
-            @Field("qrtext") String qrData);
+            @Field("qrcode") String qrData);
 
     @Headers("API-KEY: 123456")
     @Multipart
@@ -55,7 +55,7 @@ public interface Api_Call {
             @Part("amount") RequestBody etAmount,
             @Part("description") RequestBody etDesc,
             @Part("customer_id") RequestBody customerId,
-            @Part("qrcode_id") RequestBody qrCodeInfo,
+            @Part("qrcode") RequestBody qrCodeInfo,
             @Part("upload_folder_name") RequestBody folderName,
             @Part  MultipartBody.Part body);
 

@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:text="Upload meter data"
+            android:text="Petrol Filling Information"
             android:textStyle="normal">
         </TextView>
     </RelativeLayout>
@@ -55,7 +55,17 @@
                 android:textAlignment="textStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Customer name- "
+                android:text="Customer Name- "
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:id="@+id/tv_total_point"
+                style="@style/text_16_primary"
+                android:textAlignment="textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Points- "
                 android:layout_margin="@dimen/_5sdp"
                 android:textAllCaps="false"/>
 
@@ -71,7 +81,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter amount" />
+                    android:text="Enter Amount" />
 
 
                 <EditText
@@ -98,22 +108,43 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter description" />
+                    android:text="Enter Description (Optional)" />
 
 
-                <EditText
-                    android:id="@+id/et_desc"
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:inputType="text"
-                    android:textAlignment="textStart"
-                    android:layout_gravity="start"
-                    android:gravity="start"
-                    android:hint="Enter description(Optional)"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="@dimen/_10sdp"
-                    android:textColor="@color/black" />
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup"
+                      >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:id="@+id/radioButton1"
+                        android:checked="false"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:id="@+id/radioButton2"
+                        android:checked="false"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Other"
+                        android:id="@+id/radioButton3"
+                        android:checked="false"
+                        android:textSize="@dimen/_14sdp" />
+
+                </RadioGroup>
+
+
+
 
             </LinearLayout>
 
@@ -128,7 +159,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Capture meter picture" />
+                    android:text="Capture Meter Picture" />
 
                 <ImageView
                     android:layout_gravity="center"

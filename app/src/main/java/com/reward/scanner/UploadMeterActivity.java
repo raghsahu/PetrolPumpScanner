@@ -20,6 +20,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +45,13 @@ import retrofit2.adapter.rxjava2.HttpException;
 public class UploadMeterActivity extends AppCompatActivity {
     ImageView iv_back, iv_capture;
     String QrData, upload_folder_name, qrcode_id, customer_id,Et_desc=" ";
-    TextView tv_submit, tv_customer_name;
-    EditText et_amount, et_desc;
+    TextView tv_submit, tv_customer_name,tv_total_point;
+    EditText et_amount;
     private static final int CAMERA_REQUEST = 1888;
     private File finalFile;
     MultipartBody.Part body;
+    RadioGroup radioSexGroup;
+    RadioButton radioSexButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,10 @@ public class UploadMeterActivity extends AppCompatActivity {
         iv_capture = findViewById(R.id.iv_capture);
         tv_submit = findViewById(R.id.tv_submit);
         tv_customer_name = findViewById(R.id.tv_customer_name);
+        tv_total_point = findViewById(R.id.tv_total_point);
         et_amount = findViewById(R.id.et_amount);
-        et_desc = findViewById(R.id.et_desc);
+        //et_desc = findViewById(R.id.et_desc);
+        radioSexGroup=(RadioGroup)findViewById(R.id.radioGroup);
 
         if (getIntent() != null) {
             QrData = getIntent().getStringExtra("Qr_data");
@@ -92,10 +98,12 @@ public class UploadMeterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //**************************************
-                Et_desc = et_desc.getText().toString();
+                int selectedId=radioSexGroup.getCheckedRadioButtonId();
+                radioSexButton=(RadioButton)findViewById(selectedId);
+                Et_desc = radioSexButton.getText().toString();
                 String Et_amount = et_amount.getText().toString();
 
-                if (!qrcode_id.isEmpty()) {
+                if (!QrData.isEmpty()) {
                     if (!Et_amount.isEmpty() ) {
                         if (Connectivity.isConnected(UploadMeterActivity.this)) {
                             UploadMeter(Et_amount, Et_desc);
@@ -136,7 +144,7 @@ public class UploadMeterActivity extends AppCompatActivity {
         RequestBody EtAmount = RequestBody.create(MediaType.parse("text/plain"), et_amount);
         RequestBody EtDesc = RequestBody.create(MediaType.parse("text/plain"),et_desc );
         RequestBody CustomerId = RequestBody.create(MediaType.parse("text/plain"), customer_id);
-        RequestBody QrCodeInfo = RequestBody.create(MediaType.parse("text/plain"), qrcode_id);
+        RequestBody QrCodeInfo = RequestBody.create(MediaType.parse("text/plain"), QrData);
         RequestBody FolderName = RequestBody.create(MediaType.parse("text/plain"), upload_folder_name);
 
         apiInterface.UploadMeter(EtAmount, EtDesc, CustomerId, QrCodeInfo, FolderName, body)
@@ -151,9 +159,10 @@ public class UploadMeterActivity extends AppCompatActivity {
                             Log.e("result_my_test", "" + response.getMessage());
                             //Toast.makeText(EmailSignupActivity.this, "" + response.getMessage(), Toast.LENGTH_SHORT).show();
                             if (response.getSuccess().equals(1)) {
-                                Toast.makeText(UploadMeterActivity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(UploadMeterActivity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(UploadMeterActivity.this, ThanksActivity.class);
+                                intent.putExtra("Message",response.getMessage());
                                 startActivity(intent);
                                 finish();
 
@@ -227,6 +236,7 @@ public class UploadMeterActivity extends AppCompatActivity {
                             if (response.getSuccess().equals(1)) {
                                 //  Log.e("result_my_test", "" + response.getDeliveryagentInfo().getDeliveryagentId());
                                 tv_customer_name.setText("Customer name- " + response.getCustomerInfo().getCustomerName());
+                                tv_total_point.setText("Total points- " + response.getCustomerInfo().getTotalPoints());
                                 qrcode_id = response.getCustomerInfo().getQrcodeId();
                                 upload_folder_name = response.getCustomerInfo().getUploadFolderName();
                                 customer_id = response.getCustomerInfo().getCustomerId();
@@ -298,7 +308,12 @@ public class UploadMeterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+       // super.onBackPressed();
+        Intent intent = new Intent(UploadMeterActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent.putExtra("Qr_data",result.getText());
+        startActivity(intent);
+        finish();
     }
 
     @Override

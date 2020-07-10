@@ -54,6 +54,7 @@
             android:src="@drawable/ic_check_circle" />
 
         <TextView
+            android:id="@+id/tv_thanks"
             style="@style/text_16_primary"
             android:textAlignment="center"
             android:layout_width="match_parent"
