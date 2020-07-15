@@ -12,6 +12,7 @@ public interface Base_Url {
     String save_qrcode_for_customer="save_qrcode_for_customer";
     String scan_qr_code_for_customer_info="scan_qr_code_for_customer_info";
     String add_petrol_filling_info="add_petrol_filling_info";
+    String terms_and_conditions="terms_and_conditions";
 
 
 }

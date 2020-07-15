@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_margin="@dimen/_5sdp"
-        android:text="Scan QR for Add Customer"
+        android:text="SCAN NEW QR CODE"
         android:textStyle="normal">
     </TextView>
 

@@ -108,7 +108,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter Description (Optional)" />
+                    android:text="Select Option" />
 
 
                 <RadioGroup
@@ -120,7 +120,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Male"
+                        android:text="MS"
                         android:id="@+id/radioButton1"
                         android:checked="false"
                         android:textSize="@dimen/_14sdp" />
@@ -128,7 +128,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Female"
+                        android:text="HSD"
                         android:id="@+id/radioButton2"
                         android:checked="false"
                         android:textSize="@dimen/_14sdp" />
@@ -136,7 +136,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Other"
+                        android:text="XP"
                         android:id="@+id/radioButton3"
                         android:checked="false"
                         android:textSize="@dimen/_14sdp" />
